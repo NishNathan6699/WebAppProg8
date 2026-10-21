@@ -1,0 +1,13 @@
+$kind: http-request
+url: http://127.0.0.1:3001/?data=43&extra=aloha
+method: POST
+queryParams:
+  - key: data
+    value: "43"
+    disabled: false
+    description: ""
+  - key: extra
+    value: aloha
+    disabled: false
+    description: ""
+order: 2000
