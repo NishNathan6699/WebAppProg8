@@ -1,24 +1,33 @@
-const http = require('http')    //Pull in a useful node package
-                                
-const hostname = process.env.hostname || '127.0.0.1'    //get our ip address from the environment
-const port = process.env.port || 3001               //and the port
 
-const server =
-  http.createServer(            //Creates the response loop
-    (req,res)=> {               //Anonymous function to handle the request
-      res.statusCode = 200      //code for OK
-      res.setHeader('Content-Type', 'text/html') //Set the mime type HTML
+const http = require('http');
 
-      res.write('<html> <head> <title> Served </title> </head>')
-      res.write('<body>')
-      res.write('Content \n')
-      res.write('More content \n')
-      res.write('Hello World')    
-      res.end('</body></html>')
-      //Close the response
-    }                           
-)
+const hostname = '127.0.0.1';
+const port = 3001;
 
-server.listen(port, hostname, () => {   //Start the server
-  console.log(`Server running at http://${hostname}:${port}/`)  //Log the start
-})
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+
+    res.write('<!DOCTYPE html>');
+    res.write('<html lang="en">');
+    res.write('<head>');
+    res.write('<title>Nishanth Actor Information Table</title>');
+    res.write('</head>');
+    res.write('<body>');
+
+    res.write('<h1>Nishanth Actor Information Table</h1>');
+
+    res.write('<table border="1" cellpadding="10">');
+    res.write('<tr><th>Actor</th><th>Movie</th><th>Reason I Like Them</th></tr>');
+    res.write('<tr><td>Allu Arjun</td><td>Pushpa</td><td>Dance and acting</td></tr>');
+    res.write('<tr><td>Prabhas</td><td>Baahubali</td><td>Action scenes</td></tr>');
+    res.write('<tr><td>Mahesh Babu</td><td>Srimanthudu</td><td>Screen presence</td></tr>');
+    res.write('</table>');
+
+    res.write('</body>');
+    res.write('</html>');
+    res.end();
+});
+
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+});

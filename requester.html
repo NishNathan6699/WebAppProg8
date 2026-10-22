@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nishanth Fetch Request Demo</title>
+</head>
+<body>
+
+    <h1>Nishanth uses a fetch request</h1>
+
+    <p>Enter two numbers to compute on the server.</p>
+
+    <label for="x">Enter X:</label>
+    <input type="number" id="x" value="10">
+
+    <br><br>
+
+    <label for="y">Enter Y:</label>
+    <input type="number" id="y" value="11">
+
+    <br><br>
+
+    <button onclick="compute()">
+        Invoke computation on Server
+    </button>
+
+    <h3>Result:</h3>
+    <div id="result">Your result will appear here.</div>
+
+    <script>
+        function compute() {
+            const x = document.getElementById("x").value;
+            const y = document.getElementById("y").value;
+
+            const url = `http://127.0.0.1:3001/?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Server error");
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById("result").textContent = data;
+                })
+                .catch(error => {
+                    document.getElementById("result").textContent =
+                        "Fetch failed: " + error.message;
+                });
+        }
+    </script>
+
+</body>
+</html>
